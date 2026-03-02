@@ -13,13 +13,13 @@ export const users = pgTable("users", {
 export const products = pgTable("products", {
   id: uuid("id").defaultRandom().primaryKey(),
   title: text("title").notNull(),
-  description: text("desciption").notNull(),
+  description: text("description").notNull(),
   imageUrl: text("image_url").notNull(),
   userId: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
-  upsatedAt: timestamp("updated_at", { mode: "date" }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { mode: "date" }).notNull().defaultNow(),
 });
 
 // onDelete: "cascade" means that if you delete one user, it'll delete all products created by
@@ -49,7 +49,7 @@ export const usersRelations = relations(users, ({ many }) => ({
 
 // Products Relations: a product belongs to one user cans have many comments
 export const productsRelations = relations(products, ({ one, many }) => ({
-  comment: one(comments),
+  comments: one(comments),
   // `fields` = the foreign key column in THIS table (products.userId)
   // `references:` = the primary key column  in the RELATED table (users.id)
   user: one(users, { fields: [products.userId], references: [users.id] }),
