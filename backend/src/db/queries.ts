@@ -31,10 +31,10 @@ export const updateUser = async (id: string, data: Partial<NewUser>) => {
 
 //upsert => create or update
 export const upsertUser = async (data: NewUser) => {
-  const existingUser = await getUserById(data.id);
-  if (existingUser) return updateUser(data.id, data);
-
-  return createUser(data);
+  return await db.insert(users).values(data).onConflictDoUpdate({
+    target: users.id, // colonne unique uo PK
+    set: data,
+  });
 };
 
 // PRODUCTS QUERIES
@@ -83,10 +83,10 @@ export const updateProduct = async (id: string, data: Partial<NewProduct>) => {
 };
 
 export const upsertProduct = async (data: NewProduct) => {
-  const existingProduct = await getProductById(data.id!);
-  if (existingProduct) return updateProduct(data.id!, data);
-
-  return createProduct(data);
+  return await db.insert(products).values(data).onConflictDoUpdate({
+    target: products.id,
+    set: data,
+  });
 };
 
 export const getProductByUserId = async (userId: string) => {
