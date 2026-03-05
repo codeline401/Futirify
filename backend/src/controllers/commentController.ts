@@ -41,12 +41,12 @@ export const deleteComment = async (req: Request, res: Response) => {
     const { commentId } = req.params;
     const existingComments = await queries.getCommentById(commentId as string);
     if (!existingComments || existingComments.length === 0) {
-      res.status(401).json({ error: "Comment not found" });
+      res.status(404).json({ error: "Comment not found" });
     }
 
     const existingComment = existingComments[0];
     if ((existingComment.userId as string) !== userId) {
-      res.status(404).json({ error: "You can only delete your own comment" });
+      res.status(403).json({ error: "You can only delete your own comment" });
     }
 
     await queries.deleteComments(commentId as string);

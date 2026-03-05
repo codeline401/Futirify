@@ -73,7 +73,7 @@ export const createProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
   try {
     const { userId } = getAuth(req);
-    if (!userId) return res.status(400).json({ error: "Unauthorized" });
+    if (!userId) return res.status(401).json({ error: "Unauthorized" });
 
     const { id } = req.params;
     const { title, description, imageUrl } = req.body;
@@ -107,7 +107,7 @@ export const updateProduct = async (req: Request, res: Response) => {
 export const deleteProduct = async (req: Request, res: Response) => {
   try {
     const { userId } = getAuth(req);
-    if (!userId) return res.status(400).json({ error: "Unauthorized" });
+    if (!userId) return res.status(401).json({ error: "Unauthorized" });
 
     const { id } = req.params;
     // check if the product exists
