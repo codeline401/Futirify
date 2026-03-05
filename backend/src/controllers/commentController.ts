@@ -10,9 +10,9 @@ export const addComment = async (req: Request, res: Response) => {
       return res.status(401).json({ error: "Need access to add comment" });
 
     const { productId } = req.params;
-    const { content } = req.body;
-    if (!content) {
-      return res.status(400).json({ error: "Comment content is required" });
+    const { content } = req.body as { content?: unknown };
+    if (typeof content !== "string" || content.trim().length === 0) {
+      return res.status(400).json({ error: "Comment content are required" });
     }
 
     // verify product exists
@@ -22,7 +22,7 @@ export const addComment = async (req: Request, res: Response) => {
     }
 
     const comment = await queries.createComments({
-      content,
+      content: content.trim(),
       userId,
       productId: productId as string,
     });
