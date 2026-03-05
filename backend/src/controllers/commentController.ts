@@ -26,7 +26,7 @@ export const addComment = async (req: Request, res: Response) => {
       userId,
       productId: productId as string,
     });
-    res.status(200).json(comment);
+    res.status(201).json(comment);
   } catch (error) {
     console.error("Error to add comment", error);
     res.status(500).json({ error: "Failed to add comment" });
@@ -41,12 +41,14 @@ export const deleteComment = async (req: Request, res: Response) => {
     const { commentId } = req.params;
     const existingComments = await queries.getCommentById(commentId as string);
     if (!existingComments || existingComments.length === 0) {
-      res.status(404).json({ error: "Comment not found" });
+      return res.status(404).json({ error: "Comment not found" });
     }
 
     const existingComment = existingComments[0];
     if ((existingComment.userId as string) !== userId) {
-      res.status(403).json({ error: "You can only delete your own comment" });
+      return res
+        .status(403)
+        .json({ error: "You can only delete your own comment" });
     }
 
     await queries.deleteComments(commentId as string);
