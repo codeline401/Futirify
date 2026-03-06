@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { SignInButton, SignUpButton, UserButton, useAuth } from "@clerk/react";
-import { ShoppingBagIcon, PlusIcon, UserIcon, User } from "lucide-react";
+import { ShoppingBagIcon, PlusIcon, UserIcon } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
 
 function Navbar() {

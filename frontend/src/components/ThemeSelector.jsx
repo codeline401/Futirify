@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { PaletteIcon } from "lucide-react";
 
-const THEME = ["dracula", "coffee", "autumn", "cyberpunk"];
+const THEME = ["dracula", "coffee", "autumn", "cyberpunk", "forest"];
 
 function ThemeSelector() {
   const [theme, setTheme] = useState(() => {
