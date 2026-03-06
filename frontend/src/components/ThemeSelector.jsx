@@ -6,7 +6,10 @@ const THEME = ["dracula", "coffee", "autumn", "cyberpunk", "forest"];
 function ThemeSelector() {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== "undefined") {
-      return localStorage.getItem("theme") || "forest";
+      const storedTheme = localStorage.getItem("theme");
+      return storedTheme && THEME.includes(storedTheme)
+        ? storedTheme
+        : "forest";
     }
     return "forest";
   });
@@ -18,10 +21,14 @@ function ThemeSelector() {
 
   return (
     <div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-sm gap-1">
+      <button
+        type="button"
+        aria-label="Select theme"
+        className="btn btn-ghost btn-sm gap-1"
+      >
         <PaletteIcon className="size-4" />
         <span className="hidden sm:inline">Theme</span>
-      </div>
+      </button>
       <ul
         tabIndex={0}
         className="dropdown-content menu bg-base-100 rounded-box z-50 w-56 p-2 shadow-xl max-h-96 overflow-y-auto flex-nowrap"
