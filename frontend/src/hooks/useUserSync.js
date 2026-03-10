@@ -17,7 +17,7 @@ function useUserSync() {
     if (isSignedIn && user && !isPending && !isSuccess) {
       // Only sync if the user is signed in, user data is available, and there isn't already a pending or successful sync
       synUserMutation({
-        email: user.primaryEmailAddress.emailAddress,
+        email: user.primaryEmailAddress?.emailAddress,
         name: user.fullName || user.firstName,
         imageUrl: user.imageUrl,
       });
