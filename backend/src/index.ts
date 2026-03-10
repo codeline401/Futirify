@@ -10,9 +10,11 @@ import commentRoutes from "./routes/commentRoutes";
 
 const app = express();
 
+app.use(cors({ origin: ENV.FRONTEND_URL, credentials: true }));
+// credentials : true allows frontend to send cookies to backend so that we can authenticate the user
 app.use(clerkMiddleware()); // Use Clerk middleware for authentication
 // auth obj will be attached to req obj
-app.use(cors({ origin: ENV.FRONTEND_URL })); // Enable CORS for all routes
+// credentials : true allows frontend to send cookies to backend so that we can authenticate the user
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // parses form data (like from HTML forms)
 
