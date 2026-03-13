@@ -13,7 +13,7 @@ function Navbar() {
           <Link to="/" className="btn btn-ghost gap-2">
             <ShoppingBagIcon className="size-5 text-primary" />
             <span className="text-lg font-bold font-mono uppercase tracking-widest">
-              Futurify
+              BROKATERA
             </span>
           </Link>
         </div>
