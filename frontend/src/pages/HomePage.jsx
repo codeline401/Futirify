@@ -7,6 +7,7 @@ import ProductCard from "../components/ProductCard";
 
 function HomePage() {
   const { data: products, isLoading, error } = useProduct();
+  const productList = Array.isArray(products) ? products : [];
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -27,7 +28,7 @@ function HomePage() {
           <PackageIcon className="size-5 text-primary" />
           Ny entana rehetra misy
         </h2>
-        {products.length === 0 ? (
+        {productList.length === 0 ? (
           <div className="card bg-base-300">
             <div className="card-body items-center text-center py-16">
               <PackageIcon className="size-10 text-base-content/20" />
@@ -44,7 +45,7 @@ function HomePage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {products.map((product) => (
+            {productList.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
