@@ -12,7 +12,7 @@ import {
 
 function ProfilPage() {
   const navigate = useNavigate();
-  const { data: product, isLoading } = useMyProducts();
+  const { data: product, isLoading, error } = useMyProducts();
   const deleteProduct = useDeleteProduct();
 
   const handleDelete = (id) => {
@@ -20,6 +20,21 @@ function ProfilPage() {
   };
 
   if (isLoading) return <LoadingSpinner />;
+  if (error) {
+    return (
+      <div className="card bg-base-300">
+        {" "}
+        <div className="card-body items-center text-center py-16">
+          <h3 className="card-title text-error">
+            Nisy olana tamin'ny fakana entana
+          </h3>
+          <p className="text-base-content/60 text-sm">
+            Andramo averina indray.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
