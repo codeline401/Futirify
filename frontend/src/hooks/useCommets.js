@@ -14,14 +14,14 @@ export const useCreateComment = () => {
   });
 };
 
-export const useDeleteComment = (productId) => {
+export const useDeleteComment = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: deleteComment,
-    onSuccess: () => {
+    onSuccess: (_, variable) => {
       queryClient.invalidateQueries({
-        queryKey: ["product", productId],
+        queryKey: ["product", variable.productId],
       });
     },
   });

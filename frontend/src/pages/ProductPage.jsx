@@ -25,6 +25,8 @@ function ProductPage() {
     }
   };
 
+  if (isLoading) return <LoadingSpinner />; // Show a loading spinner while the product data is being fetched
+
   if (error || !product) {
     return (
       <div className="card bg-base-300 max-w-md mx-auto">
@@ -40,7 +42,6 @@ function ProductPage() {
 
   const isOwner = userId === product.userId; // Check if the current user is the owner of the product
 
-  if (isLoading) return <LoadingSpinner />; // Show a loading spinner while the product data is being fetched
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="flex items-center justify-between">

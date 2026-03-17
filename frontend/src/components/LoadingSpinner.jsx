@@ -1,9 +1,7 @@
-export default function App() {
+export default function LoadingSpinner() {
   return (
     <div className="flex items-center justify-center">
-      <span className="loading loading-spinner text-primary">
-        <span className="">Loading...</span>
-      </span>
+      <span className="loading loading-spinner text-primary" />
     </div>
   );
 }

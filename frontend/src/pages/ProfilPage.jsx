@@ -44,7 +44,7 @@ function ProfilPage() {
       </div>
 
       {/**PRODUCT */}
-      {product.length === 0 ? (
+      {!product?.length ? (
         <div className="card bg-base-300">
           <div className="card-body items-center text-center py-16">
             <PackageIcon className="size-4" />
@@ -62,7 +62,7 @@ function ProfilPage() {
       ) : (
         <div className="grid gap-4">
           {product.map((prod) => (
-            <div className="card card-side bg-base-300">
+            <div key={prod.id} className="card card-side bg-base-300">
               <figure className="w-32 shrink-0">
                 <img
                   src={prod.imageUrl}
