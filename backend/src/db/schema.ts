@@ -49,7 +49,7 @@ export const usersRelations = relations(users, ({ many }) => ({
 
 // Products Relations: a product belongs to one user cans have many comments
 export const productsRelations = relations(products, ({ one, many }) => ({
-  comments: one(comments),
+  comments: many(comments),
   // `fields` = the foreign key column in THIS table (products.userId)
   // `references:` = the primary key column  in the RELATED table (users.id)
   user: one(users, { fields: [products.userId], references: [users.id] }),

@@ -1,9 +1,7 @@
-function LoadingSpinner() {
+export default function LoadingSpinner() {
   return (
-    <div>
-      <span className="loading loading-ring loading-7xl"></span>
+    <div className="flex items-center justify-center">
+      <span className="loading loading-spinner text-primary" />
     </div>
   );
 }
-
-export default LoadingSpinner;
