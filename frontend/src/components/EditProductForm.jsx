@@ -9,12 +9,14 @@ import { useState } from "react";
 import { Link } from "react-router";
 
 function EditProductForm({ product, isPending, isError, onSubmit }) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState(() => ({
     // Initialize form data with product details
-    title: product.title,
-    description: product.description,
-    imageUrl: product.imageUrl,
-  });
+    title: product.title ?? "",
+    description: product.description ?? "",
+    imageUrl: product.imageUrl ?? "",
+  }));
+
+  const [imageLoadedFailed, setImageLoadedFailed] = useState(false);
 
   return (
     <div className="max-w-lg mx-auto">
@@ -59,19 +61,23 @@ function EditProductForm({ product, isPending, isError, onSubmit }) {
                 className="grow"
                 value={formData.imageUrl}
                 onChange={(e) => {
+                  setImageLoadedFailed(false);
                   setFormData({ ...formData, imageUrl: e.target.value });
                 }}
                 required
               />
             </label>
 
-            {formData.imageUrl && (
+            {formData.imageUrl && !imageLoadedFailed && (
               <div className="rounded-box overflow-hidden">
                 <img
                   className="w-full h-50 object-cover"
                   src={formData.imageUrl}
                   alt="Preview"
-                  onError={(e) => (e.currentTarget.style.display = "none")}
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                    setImageLoadedFailed(true);
+                  }}
                 />
               </div>
             )}

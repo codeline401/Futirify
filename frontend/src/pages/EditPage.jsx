@@ -10,10 +10,10 @@ function EditPage() {
   const { isLoaded, userId } = useAuth();
   const navigate = useNavigate();
 
-  const { data: product, isLoading, error } = useProductById(id);
+  const { data: product, isLoading } = useProductById(id);
   const updateProduct = useEditProduct();
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading || !isLoaded) return <LoadingSpinner />;
 
   if (!product || product.userId !== userId) {
     return (
